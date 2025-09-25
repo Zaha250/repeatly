@@ -6,19 +6,40 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon --exec node --loader ts-node/esm src/index.ts",
-    "build": "tsc",
+    "build": "tsc && npm run typecheck && npm run lint && npm run format:check",
     "start": "node dist/index.js",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .ts,.js",
+    "lint:fix": "eslint . --ext .ts,.js --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,md,yml,yaml}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,json,md,yml,yaml}\"",
+    "validate": "npm run typecheck && npm run lint && npm run format:check"
   },
   "keywords": [],
   "author": "Koltunov Alexandr (https://github.com/Zaha250)",
   "homepage": "",
   "repository": "https://github.com/Zaha250/repeatly",
   "license": "ISC",
+  "engines": {
+    "node": ">=18.20.0"
+  },
   "devDependencies": {
+    "@eslint/js": "^9.36.0",
     "@types/node": "^24.5.2",
+    "@typescript-eslint/eslint-plugin": "^8.44.1",
+    "@typescript-eslint/parser": "^8.44.1",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.4.0",
+    "jiti": "^2.6.0",
     "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.44.1"
   }
 }
