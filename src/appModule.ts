@@ -9,8 +9,14 @@ export function createAppModule(): AppContainer {
   const db = new Pool({
     connectionString: appConfig.DATABASE_URL,
   });
+  const telegramBot = new TelegramAdapter(appConfig.TELEGRAM_BOT_TOKEN);
 
-  const userModule = createUserModule({ db });
+  const userModule = createUserModule({
+    db,
+    telegram: telegramBot
+  });
+
+  telegramBot.start();
 
   return Object.assign(
     {},
