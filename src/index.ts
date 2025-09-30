@@ -1,5 +1,5 @@
 import express from "express";
-import { appConfig } from './core/config/index.js';
+import { appConfig } from './core/config';
 import { createAppModule } from './appModule.js';
 import { configureRoutes } from './presentation/routes.js';
 
