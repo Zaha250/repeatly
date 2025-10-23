@@ -10,7 +10,7 @@ export class TelegramAdapter implements ITelegramService {
         console.log('🤖 Telegram бот инициализирован');
     }
 
-    async sendMessage(chatId: number, msg: string): Promise<void> {
+    async sendMessage(chatId: number | string, msg: string): Promise<void> {
         await this.bot.api.sendMessage(chatId, msg);
     }
 

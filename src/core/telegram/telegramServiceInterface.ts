@@ -2,7 +2,7 @@ import type { CommandMiddleware } from 'grammy';
 import { Context } from 'grammy';
 
 export interface ITelegramService {
-    sendMessage(chatId: number, msg: string): Promise<void>;
+    sendMessage(chatId: number | string, msg: string): Promise<void>;
     command(command: TelegramCommand, handler: TelegramCommandHandler): void;
     start(): Promise<void>;
 }
