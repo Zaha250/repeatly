@@ -1,29 +1,29 @@
 import { Pool } from 'pg';
 import { UserFileRepository } from './infrastructure/userFileRepository';
-import type {ITelegramService} from "../../core/telegram/telegramServiceInterface.js";
+import type { ITelegramService } from '../../core/telegram/telegramServiceInterface.js';
 import { UsersController } from './presentation/userController';
 import { HandleStartCommandUseCase } from './application/handleStartCommandUseCase';
 
 interface UserModuleDeps {
-  db: Pool;
-  telegram: ITelegramService;
+    db: Pool;
+    telegram: ITelegramService;
 }
 
 export interface UserModule {
-  userController: UsersController;
+    userController: UsersController;
 }
 
 export function createUserModule(dependencies: UserModuleDeps): UserModule {
-  const userRepository = new UserFileRepository();
+    const userRepository = new UserFileRepository();
 
-  const handleStartCommandUseCase = new HandleStartCommandUseCase(
-    userRepository,
-    dependencies.telegram
-  );
+    const handleStartCommandUseCase = new HandleStartCommandUseCase(
+        userRepository,
+        dependencies.telegram
+    );
 
-  const userController = new UsersController(handleStartCommandUseCase);
+    const userController = new UsersController(handleStartCommandUseCase);
 
-  return {
-    userController
-  }
+    return {
+        userController,
+    };
 }

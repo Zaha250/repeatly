@@ -1,4 +1,4 @@
-import express from "express";
+import express from 'express';
 import { appConfig } from './core/config';
 import { createAppModule } from './appModule.js';
 import { configureRoutes } from './presentation/routes.js';
@@ -15,5 +15,5 @@ bootstrapTelegramRouter(appModule);
 configureRoutes(app, appModule);
 
 app.listen(port, () => {
-  console.log(`App listening on http://localhost:${port}`);
+    console.log(`App listening on http://localhost:${port}`);
 });

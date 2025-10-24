@@ -5,26 +5,26 @@ import { createUserModule } from './modules/user/userModule.js';
 import { TelegramAdapter } from './core/telegram/telegramAdapter.js';
 
 export type AppContainer = UserModule & {
-  telegramAdapter: TelegramAdapter;
+    telegramAdapter: TelegramAdapter;
 };
 
 const TEST_CHAT_ID = 883122075;
 
 export function createAppModule(): AppContainer {
-  const db = new Pool({
-    connectionString: appConfig.DATABASE_URL,
-  });
-  const telegramAdapter = new TelegramAdapter(appConfig.TELEGRAM_BOT_TOKEN);
+    const db = new Pool({
+        connectionString: appConfig.DATABASE_URL,
+    });
+    const telegramAdapter = new TelegramAdapter(appConfig.TELEGRAM_BOT_TOKEN);
 
-  const userModule = createUserModule({
-    db,
-    telegram: telegramAdapter
-  });
+    const userModule = createUserModule({
+        db,
+        telegram: telegramAdapter,
+    });
 
-  telegramAdapter.start();
+    telegramAdapter.start();
 
-  return {
-    ...userModule,
-    telegramAdapter
-  }
+    return {
+        ...userModule,
+        telegramAdapter,
+    };
 }
