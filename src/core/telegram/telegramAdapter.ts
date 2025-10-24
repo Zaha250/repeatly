@@ -3,7 +3,7 @@ import type { ITelegramService, TelegramCommandHandler } from './telegramService
 import { TelegramCommand } from './telegramServiceInterface.js';
 
 export class TelegramAdapter implements ITelegramService {
-    private readonly bot: Bot;
+    readonly bot: Bot;
 
     constructor(token: string) {
         this.bot = new Bot(token);

@@ -16,7 +16,6 @@ export class UsersController {
       throw new Error('Отсутствует chatId');
     }
 
-    // Собираем DTO для Use Case
     await this.handleStartCommand.execute({
       chatId: body.chatId,
       user: {
