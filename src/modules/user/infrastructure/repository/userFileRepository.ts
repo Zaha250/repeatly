@@ -1,7 +1,7 @@
 import {promises as fs} from 'fs';
 import path from 'path';
-import type {IUserRepository} from '../domain/userRepository';
-import type {User} from '../domain/userEntity';
+import type {IUserRepository} from '../../domain/repository/userRepository';
+import type {User} from '../../domain/entity/userEntity';
 
 // Определяем путь к файлу в корне проекта
 const dbPath = path.resolve(process.cwd(), 'users.json');

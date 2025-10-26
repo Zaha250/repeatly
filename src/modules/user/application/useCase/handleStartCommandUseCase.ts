@@ -1,6 +1,6 @@
-import type {IUserRepository} from '../domain/userRepository';
-import type {ITelegramService} from '../../../core/telegram/telegramServiceInterface';
-import type {User} from '../domain/userEntity';
+import type {IUserRepository} from '../../domain/repository/userRepository';
+import type {ITelegramService} from '../../../../core/telegram/telegramServiceInterface';
+import type {User} from '../../domain/entity/userEntity';
 
 export interface HandleStartCommandDto {
     chatId: number;

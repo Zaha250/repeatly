@@ -1,5 +1,5 @@
 import type {Request} from 'express';
-import type {HandleStartCommandUseCase} from '../application/handleStartCommandUseCase';
+import type {HandleStartCommandUseCase} from '../../application/useCase/handleStartCommandUseCase';
 
 export class UsersController {
     constructor(private readonly handleStartCommand: HandleStartCommandUseCase) {}
