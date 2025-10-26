@@ -1,11 +1,9 @@
-import {Pool} from 'pg';
 import {UserFileRepository} from './infrastructure/userFileRepository';
 import type {ITelegramService} from '../../core/telegram/telegramServiceInterface.js';
 import {UsersController} from './presentation/userController';
 import {HandleStartCommandUseCase} from './application/handleStartCommandUseCase';
 
 interface UserModuleDeps {
-    db: Pool;
     telegram: ITelegramService;
 }
 

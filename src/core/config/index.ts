@@ -8,7 +8,8 @@ dotenv.config({
 const configSchema = z.object({
     NODE_ENV: z.enum(['development', 'production']).default('development'),
     PORT: z.coerce.number().default(3500), // coerce преобразует строку в число
-    DATABASE_URL: z.string().min(1, 'DATABASE_URL не может быть пустым'),
+    POSTGRES_DB_URL: z.string().min(1, 'POSTGRES_DB_URL не может быть пустым'),
+    MONGO_DB_URL: z.string().min(1, 'MONGO_DB_URL не может быть пустым'),
     TELEGRAM_BOT_TOKEN: z.string().min(1, 'TELEGRAM_BOT_TOKEN не может быть пустым'),
     TELEGRAM_WEBHOOK_SECRET: z.string().optional(),
 });

@@ -4,16 +4,18 @@ import {createAppModule} from './appModule.js';
 import {configureRoutes} from './presentation/routes.js';
 import {bootstrapTelegramRouter} from './presentation/telegramRouter';
 
-const app = express();
-app.use(express.json());
+(async () => {
+    const app = express();
+    app.use(express.json());
 
-const port = appConfig.PORT;
+    const port = appConfig.PORT;
 
-const appModule = createAppModule();
+    const appModule = await createAppModule();
 
-bootstrapTelegramRouter(appModule);
-configureRoutes(app, appModule);
+    bootstrapTelegramRouter(appModule);
+    configureRoutes(app, appModule);
 
-app.listen(port, () => {
-    console.log(`App listening on http://localhost:${port}`);
-});
+    app.listen(port, () => {
+        console.log(`App listening on http://localhost:${port}`);
+    });
+})();

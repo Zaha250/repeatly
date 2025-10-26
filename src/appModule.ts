@@ -1,4 +1,4 @@
-import {Pool} from 'pg';
+import {connectToMongo} from './core/database/mongo';
 import type {UserModule} from './modules/user/userModule.js';
 import {appConfig} from './core/config';
 import {createUserModule} from './modules/user/userModule.js';
@@ -10,14 +10,12 @@ export type AppContainer = UserModule & {
 
 const TEST_CHAT_ID = 883122075;
 
-export function createAppModule(): AppContainer {
-    const db = new Pool({
-        connectionString: appConfig.DATABASE_URL,
-    });
+export async function createAppModule(): AppContainer {
+    await connectToMongo();
+
     const telegramAdapter = new TelegramAdapter(appConfig.TELEGRAM_BOT_TOKEN);
 
     const userModule = createUserModule({
-        db,
         telegram: telegramAdapter,
     });
 
