@@ -1,8 +1,8 @@
-import { Pool } from 'pg';
-import type { UserModule } from './modules/user/userModule.js';
-import { appConfig } from './core/config';
-import { createUserModule } from './modules/user/userModule.js';
-import { TelegramAdapter } from './core/telegram/telegramAdapter.js';
+import {Pool} from 'pg';
+import type {UserModule} from './modules/user/userModule.js';
+import {appConfig} from './core/config';
+import {createUserModule} from './modules/user/userModule.js';
+import {TelegramAdapter} from './core/telegram/telegramAdapter.js';
 
 export type AppContainer = UserModule & {
     telegramAdapter: TelegramAdapter;

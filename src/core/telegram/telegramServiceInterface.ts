@@ -1,5 +1,5 @@
-import type { CommandMiddleware } from 'grammy';
-import { Context } from 'grammy';
+import type {CommandMiddleware} from 'grammy';
+import {Context} from 'grammy';
 
 export interface ITelegramService {
     sendMessage(chatId: number | string, msg: string): Promise<void>;
