@@ -10,7 +10,7 @@ export type AppContainer = UserModule & {
 
 const TEST_CHAT_ID = 883122075;
 
-export async function createAppModule(): AppContainer {
+export async function createAppModule(): Promise<AppContainer> {
     await connectToMongo();
 
     const telegramAdapter = new TelegramAdapter(appConfig.TELEGRAM_BOT_TOKEN);
