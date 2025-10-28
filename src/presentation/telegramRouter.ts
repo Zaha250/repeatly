@@ -15,7 +15,7 @@ export function bootstrapTelegramRouter(container: AppContainer) {
                 },
             } as any);
         } catch (e) {
-            console.warn(`Ошибка обработки команды /${TelegramCommand.Start}: `, e.message);
+            console.error(`❌ Ошибка обработки команды /${TelegramCommand.Start}:`, e.message);
             await ctx.reply('Ой, что-то пошло не так. Попробуйте позже.');
         }
     });

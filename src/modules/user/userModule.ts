@@ -1,7 +1,7 @@
 import type {ITelegramService} from '../../core/telegram/telegramServiceInterface.js';
 import {UsersController} from './presentation/controller/userController';
 import {HandleStartCommandUseCase} from './application/useCase/handleStartCommandUseCase';
-import {UserFileRepository} from './infrastructure/repository/userFileRepository';
+import {UserMongoRepository} from './infrastructure/repository/mongo/userMongoRepository';
 
 interface UserModuleDeps {
     telegram: ITelegramService;
@@ -12,7 +12,7 @@ export interface UserModule {
 }
 
 export function createUserModule(dependencies: UserModuleDeps): UserModule {
-    const userRepository = new UserFileRepository();
+    const userRepository = new UserMongoRepository();
 
     const handleStartCommandUseCase = new HandleStartCommandUseCase(
         userRepository,

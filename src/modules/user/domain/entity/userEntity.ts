@@ -7,4 +7,6 @@ export interface User {
     firstName: string;
     // ISO Date
     createdAt: string;
+    // Активен ли пользователь
+    isActive: boolean;
 }

@@ -1,6 +1,6 @@
-import type {IUserRepository} from '../../domain/repository/userRepository';
+import type {CreateUserDto, IUserRepository} from '../../domain/repository/userRepository';
 import type {ITelegramService} from '../../../../core/telegram/telegramServiceInterface';
-import type {User} from '../../domain/entity/userEntity';
+import {UserAlreadyExistsError} from '../../domain/error/userErrors';
 
 export interface HandleStartCommandDto {
     chatId: number;
@@ -18,20 +18,29 @@ export class HandleStartCommandUseCase {
     ) {}
 
     async execute(dto: HandleStartCommandDto): Promise<void> {
-        const userEntity: User = {
-            id: dto.user.id.toString(), //перенести в репозиторий
-            tgId: dto.user.id,
-            username: dto.user.username,
-            firstName: dto.user.firstName,
-            createdAt: new Date().toISOString(), //перенести в репозиторий
-        };
+        try {
+            const userData: CreateUserDto = {
+                tgId: dto.user.id,
+                firstName: dto.user.firstName,
+                username: dto.user.username,
+            };
 
-        const user = await this.userRepository.findOrCreate(userEntity);
+            const existUser = await this.userRepository.findByTgId(userData.tgId);
 
-        // Отправляем приветственное сообщение
-        const message = `👋 Привет, ${user.firstName}!\n\nЯ бот для запоминания слов. Просто отправь мне слово и его перевод в формате:\n\n*слово - перевод*`;
+            if (!existUser) {
+                await this.userRepository.create(userData);
+            }
 
-        // Используем parse_mode Markdown, чтобы звездочки сработали
-        await this.telegramService.sendMessage(dto.chatId, message);
+            // Отправляем приветственное сообщение
+            // Используем parse_mode Markdown, чтобы звездочки сработали
+            await this.telegramService.sendMessage(
+                dto.chatId,
+                `👋 Привет, ${userData.firstName}!\n\nЯ бот для запоминания слов.`
+            );
+        } catch (e) {
+            if (!(e instanceof UserAlreadyExistsError)) {
+                throw e;
+            }
+        }
     }
 }
