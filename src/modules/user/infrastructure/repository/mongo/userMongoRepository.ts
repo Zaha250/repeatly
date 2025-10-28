@@ -1,42 +1,11 @@
-import {Model, model, Schema} from 'mongoose';
+import {UserModel} from './model';
 import type {User} from '../../../domain/entity/userEntity';
 import type {CreateUserDto, IUserRepository} from '../../../domain/repository/userRepository';
-import {MongoDBErrorCodes} from './errors';
 import {DatabaseError, UserAlreadyExistsError} from '../../../domain/error/userErrors';
 
-const userSchema = new Schema<User>(
-    {
-        tgId: {
-            type: Number,
-            required: true,
-            unique: true,
-            index: true,
-        },
-        isActive: {
-            type: Boolean,
-            required: true,
-            default: true,
-        },
-        firstName: {
-            type: String,
-            required: true,
-        },
-        username: {
-            type: String,
-            required: true,
-        },
-        createdAt: {
-            type: String,
-            default: () => new Date().toISOString(),
-        },
-    },
-    {
-        timestamps: false,
-        versionKey: false,
-    }
-);
-
-const UserModel: Model<User> = model<User>('User', userSchema);
+enum MongoDBErrorCodes {
+    DuplicateKey = 11000,
+}
 
 export class UserMongoRepository implements IUserRepository {
     async findById(id: number): Promise<User | null> {
@@ -64,7 +33,7 @@ export class UserMongoRepository implements IUserRepository {
         try {
             return await UserModel.create(data);
         } catch (e) {
-            if (e.code === MongoDBErrorCodes.Duplicate) {
+            if (e.code === MongoDBErrorCodes.DuplicateKey) {
                 throw new UserAlreadyExistsError(data.tgId);
             }
             throw new DatabaseError(e.message);
