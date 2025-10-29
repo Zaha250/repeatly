@@ -1,6 +1,6 @@
-import type {CreateUserDto, IUserRepository} from '../../domain/repository/userRepository';
-import type {ITelegramService} from '../../../../core/telegram/telegramServiceInterface';
+import type {CreateUserModel, IUserRepository} from '../../domain/repository/userRepository';
 import {UserAlreadyExistsError} from '../../domain/error/userErrors';
+import type {INotificationService} from '../../../../core/domain/notificationService';
 
 export interface HandleStartCommandDto {
     chatId: number;
@@ -14,12 +14,12 @@ export interface HandleStartCommandDto {
 export class HandleStartCommandUseCase {
     constructor(
         private readonly userRepository: IUserRepository,
-        private readonly telegramService: ITelegramService
+        private readonly notificationService: INotificationService
     ) {}
 
     async execute(dto: HandleStartCommandDto): Promise<void> {
         try {
-            const userData: CreateUserDto = {
+            const userData: CreateUserModel = {
                 tgId: dto.user.id,
                 firstName: dto.user.firstName,
                 username: dto.user.username,
@@ -33,7 +33,7 @@ export class HandleStartCommandUseCase {
 
             // Отправляем приветственное сообщение
             // Используем parse_mode Markdown, чтобы звездочки сработали
-            await this.telegramService.sendMessage(
+            await this.notificationService.sendMessage(
                 dto.chatId,
                 `👋 Привет, ${userData.firstName}!\n\nЯ бот для запоминания слов.`
             );

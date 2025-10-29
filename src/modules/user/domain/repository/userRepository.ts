@@ -1,6 +1,6 @@
 import type {User} from '../entity/userEntity';
 
-export interface CreateUserDto {
+export interface CreateUserModel {
     tgId: number;
     username: string;
     firstName: string;
@@ -9,5 +9,5 @@ export interface CreateUserDto {
 export interface IUserRepository {
     findById(id: number): Promise<User | null>;
     findByTgId(telegramId: number): Promise<User | null>;
-    create(userData: CreateUserDto): Promise<User>;
+    create(userData: CreateUserModel): Promise<User>;
 }

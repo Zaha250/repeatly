@@ -1,6 +1,6 @@
 import {Bot, webhookCallback} from 'grammy';
-import type {ITelegramService, TelegramCommandHandler} from './telegramServiceInterface.js';
-import {TelegramCommand} from './telegramServiceInterface.js';
+import type {ITelegramService, TelegramCommandHandler} from './telegramServiceInterface';
+import {TelegramCommand} from './telegramServiceInterface';
 
 export class TelegramAdapter implements ITelegramService {
     readonly bot: Bot;

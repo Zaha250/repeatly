@@ -1,6 +1,6 @@
 import {UserModel} from './model';
 import type {User} from '../../../domain/entity/userEntity';
-import type {CreateUserDto, IUserRepository} from '../../../domain/repository/userRepository';
+import type {CreateUserModel, IUserRepository} from '../../../domain/repository/userRepository';
 import {DatabaseError, UserAlreadyExistsError} from '../../../domain/error/userErrors';
 
 enum MongoDBErrorCodes {
@@ -29,7 +29,7 @@ export class UserMongoRepository implements IUserRepository {
         }
     }
 
-    async create(data: CreateUserDto): Promise<User> {
+    async create(data: CreateUserModel): Promise<User> {
         try {
             return await UserModel.create(data);
         } catch (e) {

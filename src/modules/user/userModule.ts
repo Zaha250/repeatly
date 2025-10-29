@@ -1,10 +1,10 @@
-import type {ITelegramService} from '../../core/telegram/telegramServiceInterface.js';
 import {UsersController} from './presentation/controller/userController';
 import {HandleStartCommandUseCase} from './application/useCase/handleStartCommandUseCase';
 import {UserMongoRepository} from './infrastructure/repository/mongo/userMongoRepository';
+import type {INotificationService} from '../../core/domain/notificationService';
 
 interface UserModuleDeps {
-    telegram: ITelegramService;
+    notificationService: INotificationService;
 }
 
 export interface UserModule {
@@ -16,7 +16,7 @@ export function createUserModule(dependencies: UserModuleDeps): UserModule {
 
     const handleStartCommandUseCase = new HandleStartCommandUseCase(
         userRepository,
-        dependencies.telegram
+        dependencies.notificationService
     );
 
     const userController = new UsersController(handleStartCommandUseCase);

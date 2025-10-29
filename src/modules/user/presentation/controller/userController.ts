@@ -1,12 +1,11 @@
-import type {Request} from 'express';
 import type {HandleStartCommandUseCase} from '../../application/useCase/handleStartCommandUseCase';
+import type {HandleStartCommandRequestDto} from '../dto/userDto';
 
 export class UsersController {
     constructor(private readonly handleStartCommand: HandleStartCommandUseCase) {}
 
     // Обработчик команды /start
-    async handleStart(req: Request) {
-        const body = req.body as any;
+    async handleStart(body: HandleStartCommandRequestDto) {
         if (!body?.from) {
             throw new Error('Некорректные данные пользователя');
         }
