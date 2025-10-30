@@ -1,5 +1,5 @@
-import type {INotificationService} from '../../domain/notificationService.js';
-import type {ITelegramService} from './telegramServiceInterface.js';
+import type {INotificationService} from '../../domain/notificationService';
+import type {ITelegramService} from './telegramServiceInterface';
 
 /**
  * Адаптер, который реализует доменную потребность

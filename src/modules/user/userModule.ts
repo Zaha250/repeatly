@@ -1,7 +1,7 @@
 import {UsersController} from './presentation/controller/userController';
 import {HandleStartCommandUseCase} from './application/useCase/handleStartCommandUseCase';
 import {UserMongoRepository} from './infrastructure/repository/mongo/userMongoRepository';
-import type {INotificationService} from '../../core/domain/notificationService';
+import type {INotificationService} from '../../domain/notificationService';
 
 interface UserModuleDeps {
     notificationService: INotificationService;

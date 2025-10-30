@@ -1,6 +1,6 @@
 import express from 'express';
 import {appConfig} from './core/config';
-import {createAppModule} from './appModule.js';
+import {createAppModule} from './bootstrap/appModule';
 import {configureRoutes} from './presentation/routes.js';
 import {bootstrapTelegramRouter} from './presentation/telegramRouter';
 

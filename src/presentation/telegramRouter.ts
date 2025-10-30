@@ -1,5 +1,5 @@
-import type {AppContainer} from '../appModule';
-import {TelegramCommand} from '../core/infrastructure/telegram/telegramServiceInterface';
+import type {AppContainer} from '../bootstrap/appModule';
+import {TelegramCommand} from '../infrastructure/telegram/telegramServiceInterface';
 
 export function bootstrapTelegramRouter(container: AppContainer) {
     const {telegramAdapter, userController} = container;
