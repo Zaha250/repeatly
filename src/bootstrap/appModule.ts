@@ -4,11 +4,9 @@ import {appConfig} from '../core/config';
 import {createUserModule} from '../modules/user/userModule';
 import {TelegramAdapter} from '../infrastructure/telegram/telegramAdapter';
 import {TelegramNotificationAdapter} from '../infrastructure/telegram/telegramNotificationAdapter';
-import type {ITelegramService} from '../infrastructure/telegram/telegramService';
+import {bootstrapTelegramRouter} from '../presentation/telegramRouter';
 
-export type AppContainer = UserModule & {
-    telegramService: ITelegramService;
-};
+export type AppContainer = UserModule;
 
 export async function createAppModule(): Promise<AppContainer> {
     await connectToMongo();
@@ -21,10 +19,11 @@ export async function createAppModule(): Promise<AppContainer> {
         notificationService,
     });
 
+    bootstrapTelegramRouter(telegramAdapter, userModule.userController);
+
     telegramAdapter.start();
 
     return {
         ...userModule,
-        telegramService: telegramAdapter,
     };
 }

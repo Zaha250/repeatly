@@ -2,7 +2,6 @@ import express from 'express';
 import {appConfig} from './core/config';
 import {createAppModule} from './bootstrap/appModule';
 import {configureRoutes} from './presentation/routes.js';
-import {bootstrapTelegramRouter} from './presentation/telegramRouter';
 
 (async () => {
     const app = express();
@@ -12,7 +11,6 @@ import {bootstrapTelegramRouter} from './presentation/telegramRouter';
 
     const appModule = await createAppModule();
 
-    bootstrapTelegramRouter(appModule);
     configureRoutes(app, appModule);
 
     app.listen(port, () => {

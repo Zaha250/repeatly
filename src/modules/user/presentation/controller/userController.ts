@@ -5,7 +5,7 @@ export class UsersController {
     constructor(private readonly handleStartCommand: HandleStartCommandUseCase) {}
 
     // Обработчик команды /start
-    async handleStart(dto: HandleStartCommandRequestDto) {
+    handleStart = async (dto: HandleStartCommandRequestDto) => {
         if (!dto?.from) {
             throw new Error('Некорректные данные пользователя');
         }
@@ -21,5 +21,5 @@ export class UsersController {
                 username: dto.from.username,
             },
         });
-    }
+    };
 }
