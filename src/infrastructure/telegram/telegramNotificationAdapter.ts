@@ -1,5 +1,5 @@
 import type {INotificationService} from '../../domain/notificationService';
-import type {ITelegramService} from './telegramServiceInterface';
+import type {ITelegramService} from './telegramService';
 
 /**
  * Адаптер, который реализует доменную потребность
@@ -9,9 +9,6 @@ export class TelegramNotificationAdapter implements INotificationService {
     constructor(private readonly telegramService: ITelegramService) {}
 
     async sendMessage(recipientId: number, message: string): Promise<void> {
-        await this.telegramService.sendMessage(
-            recipientId,
-            message,
-        );
+        await this.telegramService.sendMessage(recipientId, message);
     }
 }

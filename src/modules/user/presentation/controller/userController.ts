@@ -5,20 +5,20 @@ export class UsersController {
     constructor(private readonly handleStartCommand: HandleStartCommandUseCase) {}
 
     // Обработчик команды /start
-    async handleStart(body: HandleStartCommandRequestDto) {
-        if (!body?.from) {
+    async handleStart(dto: HandleStartCommandRequestDto) {
+        if (!dto?.from) {
             throw new Error('Некорректные данные пользователя');
         }
-        if (!body?.chatId) {
+        if (!dto?.chatId) {
             throw new Error('Отсутствует chatId');
         }
 
         await this.handleStartCommand.execute({
-            chatId: body.chatId,
+            chatId: dto.chatId,
             user: {
-                id: body.from.id,
-                firstName: body.from.first_name,
-                username: body.from.username,
+                id: dto.from.id,
+                firstName: dto.from.first_name,
+                username: dto.from.username,
             },
         });
     }

@@ -15,28 +15,31 @@ export default [
             parserOptions: {
                 ecmaVersion: 2022,
                 sourceType: 'module',
-                project: './tsconfig.json'
+                project: './tsconfig.json',
             },
             globals: {
                 node: true,
-                es2022: true
-            }
+                es2022: true,
+            },
         },
         plugins: {
-            '@typescript-eslint': typescriptEslint
+            '@typescript-eslint': typescriptEslint,
         },
         rules: {
             ...typescriptEslint.configs.recommended.rules,
-            '@typescript-eslint/no-unused-vars': ['warn', {
-                "argsIgnorePattern": "^_",
-                "varsIgnorePattern": "^_",
-                "caughtErrorsIgnorePattern": "^_"
-            }],
+            '@typescript-eslint/no-unused-vars': [
+                'warn',
+                {
+                    argsIgnorePattern: '^_',
+                    varsIgnorePattern: '^_',
+                    caughtErrorsIgnorePattern: '^_',
+                },
+            ],
             '@typescript-eslint/explicit-function-return-type': 'off',
             '@typescript-eslint/explicit-module-boundary-types': 'off',
             '@typescript-eslint/no-explicit-any': 'warn',
-            'no-undef': 'off'
-        }
+            'no-undef': 'off',
+        },
     },
 
     // Конфигурация для JavaScript файлов
@@ -47,11 +50,11 @@ export default [
             sourceType: 'module',
             globals: {
                 node: true,
-                es2022: true
-            }
-        }
+                es2022: true,
+            },
+        },
     },
 
     // Prettier config должен быть последним
-    prettier
+    prettier,
 ];

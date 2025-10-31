@@ -1,9 +1,9 @@
-import {Bot, webhookCallback} from 'grammy';
-import type {ITelegramService, TelegramCommandHandler} from './telegramServiceInterface';
-import {TelegramCommand} from './telegramServiceInterface';
+import {Bot, webhookCallback, Context} from 'grammy';
+import type {ITelegramService, TelegramCommandHandler} from './telegramService';
+import {TelegramCommand} from './telegramService';
 
 export class TelegramAdapter implements ITelegramService {
-    readonly bot: Bot;
+    private readonly bot: Bot;
 
     constructor(token: string) {
         this.bot = new Bot(token);
@@ -15,7 +15,14 @@ export class TelegramAdapter implements ITelegramService {
     }
 
     command(command: TelegramCommand, handler: TelegramCommandHandler) {
-        this.bot.command(command, handler);
+        this.bot.command(command, async (ctx: Context) => {
+            try {
+                await handler(ctx);
+            } catch (e) {
+                console.error(`❌ Ошибка обработки команды /${TelegramCommand.Start}:`, e.message);
+                await ctx.reply('Ой, что-то пошло не так. Попробуйте позже.');
+            }
+        });
     }
 
     public getWebhookMiddleware() {

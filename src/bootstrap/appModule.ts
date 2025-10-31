@@ -4,9 +4,10 @@ import {appConfig} from '../core/config';
 import {createUserModule} from '../modules/user/userModule';
 import {TelegramAdapter} from '../infrastructure/telegram/telegramAdapter';
 import {TelegramNotificationAdapter} from '../infrastructure/telegram/telegramNotificationAdapter';
+import type {ITelegramService} from '../infrastructure/telegram/telegramService';
 
 export type AppContainer = UserModule & {
-    telegramAdapter: TelegramAdapter;
+    telegramService: ITelegramService;
 };
 
 export async function createAppModule(): Promise<AppContainer> {
@@ -24,6 +25,6 @@ export async function createAppModule(): Promise<AppContainer> {
 
     return {
         ...userModule,
-        telegramAdapter,
+        telegramService: telegramAdapter,
     };
 }
