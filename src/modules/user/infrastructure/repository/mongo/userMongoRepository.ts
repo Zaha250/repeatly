@@ -39,4 +39,12 @@ export class UserMongoRepository implements IUserRepository {
             throw new DatabaseError(e.message);
         }
     }
+
+    async getList(): Promise<User[]> {
+        try {
+            return await UserModel.find();
+        } catch (e) {
+            throw new DatabaseError(e.message);
+        }
+    }
 }
