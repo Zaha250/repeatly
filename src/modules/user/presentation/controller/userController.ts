@@ -1,12 +1,13 @@
-import type {Request, Response} from 'express';
+import type {NextFunction, Request, Response} from 'express';
 import type {HandleStartCommandUseCase} from '../../application/useCase/handleStartCommandUseCase';
 import type {HandleStartCommandRequestDto} from '../dto/userDto';
 import {GetUserListUseCase} from '../../application/useCase/getUserListUseCase';
+import {success} from '@src/presentation/http/apiResponse';
 
 export class UsersController {
     constructor(
       private readonly handleStartCommand: HandleStartCommandUseCase,
-      private readonly getUserList: GetUserListUseCase
+      private readonly getUserListUseCase: GetUserListUseCase
     ) {}
 
     /**
@@ -33,24 +34,15 @@ export class UsersController {
     /**
      * Получение списка всех пользователей
      * */
-    getUserList = async (req: Request, res: Response) => {
-        try {
-            console.log(this.getUserList);
-            const userList = await this.getUserList.execute();
+    getUserList = async (
+        _req: Request,
+        res: Response,
+        _next: NextFunction
+    ) => {
+        const userList = await this.getUserListUseCase.execute();
 
-            res.send({
-                status: 200,
-                data: userList,
-            });
-        } catch (e) {
-            console.error(e);
-
-            res.send({
-                status: 500,
-                error: {
-                    message: e.message
-                }
-            });
-        }
+        return res.status(200).json(success(
+            userList,
+        ));
     }
 }
