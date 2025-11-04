@@ -2,14 +2,14 @@
  * Ошибка, выбрасываемая, когда пользователь с таким ID уже существует.
  */
 export class UserAlreadyExistsError extends Error {
-    constructor(identifier: string | number) {
-        super(`Пользователь с идентификатором ${identifier} уже существует.`);
+    constructor(id: string | number) {
+        super(`Пользователь с идентификатором ${id} уже существует.`);
         this.name = 'UserAlreadyExistsError';
     }
 }
 
 /**
- * Общая ошибка базы данных, скрывающая детали реализации.
+ * Общая ошибка базы данных
  */
 export class DatabaseError extends Error {
     constructor(message: string) {

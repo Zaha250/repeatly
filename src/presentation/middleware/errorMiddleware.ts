@@ -1,5 +1,5 @@
 import type {Request, Response, NextFunction} from 'express';
-import {AppError} from './appError';
+import {AppError} from '../errors/appError';
 import {failure} from '../http/apiResponse';
 
 /**

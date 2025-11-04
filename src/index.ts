@@ -2,7 +2,7 @@ import express from 'express';
 import {appConfig} from './core/config';
 import {createAppModule} from './bootstrap/appModule';
 import {configureRoutes} from './presentation/routes.js';
-import {errorMiddleware} from './presentation/errors/errorMiddleware';
+import {errorMiddleware} from './presentation/middleware/errorMiddleware';
 
 (async () => {
     const app = express();

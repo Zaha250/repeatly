@@ -1,12 +1,13 @@
-import {connectToMongo} from '../infrastructure/database/mongo';
+import {connectToMongo} from '../infrastructure/database/mongo/mongo';
 import type {UserModule} from '../modules/user/userModule';
 import {appConfig} from '../core/config';
 import {createUserModule} from '../modules/user/userModule';
 import {TelegramAdapter} from '../infrastructure/telegram/telegramAdapter';
 import {TelegramNotificationAdapter} from '../infrastructure/telegram/telegramNotificationAdapter';
 import {bootstrapTelegramRouter} from '../presentation/telegramRouter';
+import {createWordModule, type WordModule} from '@src/modules/word/wordModule';
 
-export type AppContainer = UserModule;
+export type AppContainer = UserModule & WordModule;
 
 export async function createAppModule(): Promise<AppContainer> {
     await connectToMongo();
@@ -18,6 +19,7 @@ export async function createAppModule(): Promise<AppContainer> {
     const userModule = createUserModule({
         notificationService,
     });
+    const wordModule = createWordModule();
 
     bootstrapTelegramRouter(telegramAdapter, userModule.userController);
 
@@ -25,5 +27,6 @@ export async function createAppModule(): Promise<AppContainer> {
 
     return {
         ...userModule,
+        ...wordModule
     };
 }

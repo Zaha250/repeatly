@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import {appConfig} from '../../core/config';
+import {appConfig} from '../../../core/config';
 
 /**
  * Подключение к MongoDB

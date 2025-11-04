@@ -1,6 +1,6 @@
 import type {CreateUserModel, IUserRepository} from '../../domain/repository/userRepository';
 import {UserAlreadyExistsError} from '../../domain/error/userErrors';
-import type {INotificationService} from '../../../../domain/notificationService';
+import type {INotificationService} from '@src/domain/notificationService';
 
 export interface HandleStartCommandDto {
     chatId: number;

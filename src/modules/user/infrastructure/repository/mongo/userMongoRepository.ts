@@ -2,10 +2,7 @@ import {UserModel} from './model';
 import type {User} from '../../../domain/entity/userEntity';
 import type {CreateUserModel, IUserRepository} from '../../../domain/repository/userRepository';
 import {DatabaseError, UserAlreadyExistsError} from '../../../domain/error/userErrors';
-
-enum MongoDBErrorCodes {
-    DuplicateKey = 11000,
-}
+import {MongoDBErrorCodes} from '@src/infrastructure/database/mongo/error';
 
 export class UserMongoRepository implements IUserRepository {
     async findById(id: number): Promise<User | null> {

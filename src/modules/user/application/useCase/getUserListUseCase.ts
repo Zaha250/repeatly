@@ -6,9 +6,9 @@ export class GetUserListUseCase {
 
   async execute(): Promise<User[]> {
     try {
-      return this.userRepository.getList();
+      return await this.userRepository.getList();
     } catch (e) {
-      throw e;
+      throw new Error(e.message);
     }
   }
 }
