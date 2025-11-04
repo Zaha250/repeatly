@@ -1,16 +1,20 @@
-import type {Express} from 'express';
+import {type Express, Router} from 'express';
 import type {AppContainer} from '../bootstrap/appModule';
 
 export function configureRoutes(app: Express, container: AppContainer): void {
     const {userController, wordController} = container;
 
-    app.get('/api/health', (req, res) => {
+    const router = Router();
+
+    app.use('/api', router);
+
+    router.get('/health', (req, res) => {
         res.status(200).send('OK');
     });
 
     /* Users */
-    app.get('/api/users', userController.getUserList);
+    router.get('/user', userController.getUserList);
 
     /* Words */
-    app.use('/api/word', wordController.addWord);
+    router.use('/word', wordController.addWord);
 }

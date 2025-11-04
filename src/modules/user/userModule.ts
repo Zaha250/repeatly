@@ -3,9 +3,11 @@ import {HandleStartCommandUseCase} from './application/useCase/handleStartComman
 import { GetUserListUseCase } from './application/useCase/getUserListUseCase';
 import {UserMongoRepository} from './infrastructure/repository/mongo/userMongoRepository';
 import type {INotificationService} from '@src/domain/notificationService';
+import type {ILogger} from '@src/domain/logger';
 
 interface UserModuleDeps {
     notificationService: INotificationService;
+    logger: ILogger;
 }
 
 export interface UserModule {

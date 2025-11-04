@@ -3,7 +3,7 @@ import type {WordEntity} from '@src/modules/word/domain/entity/wordEntity';
 import {WordModel} from '@src/modules/word/infrastructure/repository/mongo/model';
 import {WordAlreadyExistsError} from '@src/modules/word/domain/error/wordError';
 import {MongoDBErrorCodes} from '@src/infrastructure/database/mongo/error';
-import {DatabaseError} from '@src/modules/user/domain/error/userErrors';
+import {DatabaseError} from '@src/domain/errors';
 
 export class WordMongoRepository implements IWordRepository {
     async add(word: AddWordData): Promise<WordEntity> {

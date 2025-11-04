@@ -1,8 +1,9 @@
 import {UserModel} from './model';
 import type {User} from '../../../domain/entity/userEntity';
 import type {CreateUserModel, IUserRepository} from '../../../domain/repository/userRepository';
-import {DatabaseError, UserAlreadyExistsError} from '../../../domain/error/userErrors';
+import {UserAlreadyExistsError} from '../../../domain/error/userErrors';
 import {MongoDBErrorCodes} from '@src/infrastructure/database/mongo/error';
+import {DatabaseError} from '@src/domain/errors';
 
 export class UserMongoRepository implements IUserRepository {
     async findById(id: number): Promise<User | null> {

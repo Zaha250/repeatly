@@ -15,6 +15,8 @@ export class WordController {
     ) => {
         const body = req.body;
         const newWord = await this.addWordUseCase.execute(body);
-        return res.status(201).json(success(newWord));
+        return res
+            .status(201)
+            .json(success(newWord));
     }
 }
