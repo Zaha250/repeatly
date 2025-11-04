@@ -4,3 +4,4 @@ dist
 .env
 .env.development
 users.json
+logs
