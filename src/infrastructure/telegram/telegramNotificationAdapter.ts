@@ -1,4 +1,4 @@
-import type {INotificationService} from '../../domain/notificationService';
+import type {INotificationService} from '@src/domain/notificationService';
 import type {ITelegramService} from './telegramService';
 
 /**

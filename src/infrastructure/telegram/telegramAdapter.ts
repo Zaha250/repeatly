@@ -1,8 +1,8 @@
 import {Bot, webhookCallback, Context} from 'grammy';
 import type {ITelegramService, TelegramCommandHandler} from './telegramService';
 import {TelegramCommand} from './telegramService';
-import type {ITelegramRouterAdapter, StartHandler} from '../../presentation/routerInterface';
-import type {HandleStartCommandRequestDto} from '../../modules/user/presentation/dto/userDto';
+import type {ITelegramRouterAdapter, StartHandler} from '@src/presentation/routerInterface';
+import type {HandleStartCommandRequestDto} from '@src/modules/user/presentation/dto/userDto';
 
 export class TelegramAdapter implements ITelegramService, ITelegramRouterAdapter {
     private readonly bot: Bot;

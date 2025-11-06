@@ -1,12 +1,38 @@
-export interface User {
-    id: string;
-    // ID of telegram
-    tgId: number;
-    // Username of telegram
-    username: string;
-    firstName: string;
-    // ISO Date
-    createdAt: string;
-    // Активен ли пользователь
-    isActive: boolean;
+export class User {
+    constructor(
+        public readonly id: string,
+        public readonly tgId: number,
+        public username: string,
+        public firstName: string,
+        public readonly createdAt: string,
+        public isActive: boolean
+    ) {}
+
+    /**
+     * Получения даты создания как объект Date
+     * */
+    getCreatedAtDate(): Date {
+        return new Date(this.createdAt);
+    }
+
+    /**
+     * Проверка активности пользователя
+     * */
+    isUserActive(): boolean {
+        return this.isActive;
+    }
+
+    /**
+     * Деактивация пользователя
+     * */
+    deactivate(): void {
+        this.isActive = false;
+    }
+
+    /**
+     * Активации пользователя
+     * */
+    activate(): void {
+        this.isActive = true;
+    }
 }
