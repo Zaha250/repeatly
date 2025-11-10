@@ -16,9 +16,7 @@ export function createWordModule(dependencies: WordDeps): WordModule {
 
     const addWordUseCase = new AddWordUseCase(wordRepository);
 
-    const wordController = new WordController(
-        addWordUseCase,
-    );
+    const wordController = new WordController(addWordUseCase);
 
     return {
         wordController,

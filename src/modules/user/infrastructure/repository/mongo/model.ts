@@ -1,7 +1,9 @@
-import {model, Model, Schema} from 'mongoose';
-import type {User} from '../../../domain/entity/userEntity';
+import {Document, model, Model, Schema} from 'mongoose';
+import {User} from '../../../domain/entity/userEntity';
 
-const userSchema = new Schema<User>(
+export interface UserDocument extends User, Document {}
+
+const userSchema = new Schema<UserDocument>(
     {
         tgId: {
             type: Number,
@@ -33,4 +35,4 @@ const userSchema = new Schema<User>(
     }
 );
 
-export const UserModel: Model<User> = model('User', userSchema);
+export const UserModel: Model<UserDocument> = model('User', userSchema);

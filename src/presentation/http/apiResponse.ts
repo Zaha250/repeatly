@@ -16,9 +16,7 @@ interface ErrorResponse {
  * @param data Данные, которые будут содержаться в ответе.
  * @returns Объект, содержащий данные и тип SUCCESS_RESPONSE.
  */
-export function success<T>(
-    data: T,
-): SuccessResponse<T> {
+export function success<T>(data: T): SuccessResponse<T> {
     return {
         data,
     };
@@ -31,12 +29,8 @@ export function success<T>(
  * @param details Дополнительные данные об ошибке.
  * @returns Объект, содержащий информацию об ошибке и тип ERROR_RESPONSE.
  */
-export function failure(
-    message: string,
-    code = 500,
-    details?: unknown,
-): ErrorResponse {
+export function failure(message: string, code = 500, details?: unknown): ErrorResponse {
     return {
-        error: { message, code, details },
+        error: {message, code, details},
     };
 }

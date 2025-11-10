@@ -1,17 +1,14 @@
-import {Document} from 'mongoose';
-import {UserModel} from './model';
+import {UserDocument, UserModel} from './model';
 import {User} from '../../../domain/entity/userEntity';
 import type {CreateUserModel, IUserRepository} from '../../../domain/repository/userRepository';
 import {UserAlreadyExistsError} from '../../../domain/error/userErrors';
 import {MongoDBErrorCodes} from '@src/infrastructure/database/mongo/error';
 import {DatabaseError} from '@src/domain/errors';
 
-interface UserDocument extends User, Document {}
-
 export class UserMongoRepository implements IUserRepository {
-    async findById(id: number): Promise<User | null> {
+    async findById(id: string): Promise<User | null> {
         try {
-            const doc = await UserModel.findById(id);
+            const doc = await UserModel.findById(id).exec();
             if (!doc) {
                 return null;
             }
@@ -23,8 +20,8 @@ export class UserMongoRepository implements IUserRepository {
 
     async findByTgId(tgId: number): Promise<User | null> {
         try {
-            const user = await UserModel.findOne({tgId});
-            return user || null;
+            const doc = await UserModel.findOne({tgId}).exec();
+            return doc ? this.toEntity(doc) : null;
         } catch (e) {
             throw new DatabaseError(e.message);
         }
@@ -32,7 +29,8 @@ export class UserMongoRepository implements IUserRepository {
 
     async create(data: CreateUserModel): Promise<User> {
         try {
-            return await UserModel.create(data);
+            const doc = await UserModel.create(data);
+            return this.toEntity(doc);
         } catch (e) {
             if (e.code === MongoDBErrorCodes.DuplicateKey) {
                 throw new UserAlreadyExistsError(data.tgId);
@@ -43,7 +41,7 @@ export class UserMongoRepository implements IUserRepository {
 
     async getList(): Promise<User[]> {
         try {
-            const docList = await UserModel.find();
+            const docList = await UserModel.find().exec();
             return docList.map((doc) => this.toEntity(doc));
         } catch (e) {
             throw new DatabaseError(e.message);
@@ -51,13 +49,6 @@ export class UserMongoRepository implements IUserRepository {
     }
 
     private toEntity(doc: UserDocument): User {
-        return new User(
-            doc._id.toString(),
-            doc.tgId,
-            doc.username,
-            doc.firstName,
-            doc.createdAt,
-            doc.isActive
-        );
+        return new User(doc.tgId, doc.username, doc.firstName, doc.createdAt, doc.isActive);
     }
 }

@@ -5,11 +5,7 @@ import {AppError} from '@src/presentation/errors/appError';
  */
 export class DatabaseError extends AppError {
     constructor(message: string) {
-        super(
-            `Внутренняя ошибка базы данных: ${message}`,
-            500,
-            'DatabaseError',
-        );
+        super(`Внутренняя ошибка базы данных: ${message}`, 500, 'DatabaseError');
         this.name = 'DatabaseError';
     }
 }
@@ -19,11 +15,7 @@ export class DatabaseError extends AppError {
  */
 export class NotFoundError extends AppError {
     constructor(message: string = 'Resource not found') {
-        super(
-            message,
-            404,
-            'NotFoundError',
-        );
+        super(message, 404, 'NotFoundError');
         this.name = 'NotFoundError';
     }
 }

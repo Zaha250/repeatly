@@ -1,6 +1,6 @@
 import {UsersController} from './presentation/controller/userController';
 import {HandleStartCommandUseCase} from './application/useCase/handleStartCommandUseCase';
-import { GetUserListUseCase } from './application/useCase/getUserListUseCase';
+import {GetUserListUseCase} from './application/useCase/getUserListUseCase';
 import {UserMongoRepository} from './infrastructure/repository/mongo/userMongoRepository';
 import type {INotificationService} from '@src/domain/notificationService';
 import type {ILogger} from '@src/domain/logger';
@@ -24,10 +24,7 @@ export function createUserModule(dependencies: UserModuleDeps): UserModule {
 
     const getUserListUseCase = new GetUserListUseCase(userRepository);
 
-    const userController = new UsersController(
-      handleStartCommandUseCase,
-      getUserListUseCase
-    );
+    const userController = new UsersController(handleStartCommandUseCase, getUserListUseCase);
 
     return {
         userController,

@@ -7,7 +7,7 @@ export interface CreateUserModel {
 }
 
 export interface IUserRepository {
-    findById(id: number): Promise<User | null>;
+    findById(id: string): Promise<User | null>;
     findByTgId(telegramId: number): Promise<User | null>;
     create(userData: CreateUserModel): Promise<User>;
     getList(): Promise<User[]>;

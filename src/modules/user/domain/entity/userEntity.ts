@@ -1,6 +1,6 @@
 export class User {
     constructor(
-        public readonly id: string,
+        // public readonly id: string,
         public readonly tgId: number,
         public username: string,
         public firstName: string,
@@ -9,7 +9,8 @@ export class User {
     ) {}
 
     /**
-     * Получения даты создания как объект Date
+     * Получения даты создания
+     * @returns {Date} - Дата
      * */
     getCreatedAtDate(): Date {
         return new Date(this.createdAt);

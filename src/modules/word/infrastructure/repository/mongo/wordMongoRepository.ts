@@ -1,4 +1,7 @@
-import type {AddWordData, IWordRepository} from '@src/modules/word/domain/repository/wordRepository';
+import type {
+    AddWordData,
+    IWordRepository,
+} from '@src/modules/word/domain/repository/wordRepository';
 import type {WordEntity} from '@src/modules/word/domain/entity/wordEntity';
 import {WordModel} from '@src/modules/word/infrastructure/repository/mongo/model';
 import {WordAlreadyExistsError} from '@src/modules/word/domain/error/wordError';

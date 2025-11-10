@@ -6,8 +6,8 @@ import {success} from '@src/presentation/http/apiResponse';
 
 export class UsersController {
     constructor(
-      private readonly handleStartCommand: HandleStartCommandUseCase,
-      private readonly getUserListUseCase: GetUserListUseCase
+        private readonly handleStartCommand: HandleStartCommandUseCase,
+        private readonly getUserListUseCase: GetUserListUseCase
     ) {}
 
     /**
@@ -34,15 +34,9 @@ export class UsersController {
     /**
      * Получение списка всех пользователей
      * */
-    getUserList = async (
-        _req: Request,
-        res: Response,
-        _next: NextFunction
-    ) => {
+    getUserList = async (_req: Request, res: Response, _next: NextFunction) => {
         const userList = await this.getUserListUseCase.execute();
 
-        return res.status(200).json(success(
-            userList,
-        ));
-    }
+        return res.status(200).json(success(userList));
+    };
 }

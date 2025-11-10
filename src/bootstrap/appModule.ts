@@ -20,10 +20,10 @@ export async function createAppModule(): Promise<AppContainer> {
 
     const userModule = createUserModule({
         notificationService,
-        logger
+        logger,
     });
     const wordModule = createWordModule({
-        logger
+        logger,
     });
 
     bootstrapTelegramRouter(telegramAdapter, userModule.userController);
@@ -32,6 +32,6 @@ export async function createAppModule(): Promise<AppContainer> {
 
     return {
         ...userModule,
-        ...wordModule
+        ...wordModule,
     };
 }

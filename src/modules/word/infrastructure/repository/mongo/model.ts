@@ -5,11 +5,11 @@ const wordScheme = new Schema<WordEntity>(
     {
         text: {
             type: String,
-            required: true
+            required: true,
         },
         translation: {
             type: String,
-            required: true
+            required: true,
         },
         example: String,
         createdAt: {
