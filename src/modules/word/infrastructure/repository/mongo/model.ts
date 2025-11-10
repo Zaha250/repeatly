@@ -1,7 +1,9 @@
-import {model, type Model, Schema} from 'mongoose';
-import type {WordEntity} from '@src/modules/word/domain/entity/wordEntity';
+import {model, type Model, Schema, Document} from 'mongoose';
+import type {Word} from '@src/modules/word/domain/entity/word';
 
-const wordScheme = new Schema<WordEntity>(
+export interface WordDocument extends Word, Document {}
+
+const wordScheme = new Schema<WordDocument>(
     {
         text: {
             type: String,
@@ -23,4 +25,11 @@ const wordScheme = new Schema<WordEntity>(
     }
 );
 
-export const WordModel: Model<WordEntity> = model<WordEntity>('Word', wordScheme);
+wordScheme.virtual('id').get(function (this: WordDocument) {
+    return this._id.toHexString();
+});
+
+wordScheme.set('toObject', {virtuals: true});
+wordScheme.set('toJSON', {virtuals: true});
+
+export const WordModel: Model<WordDocument> = model('Word', wordScheme);

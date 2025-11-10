@@ -1,4 +1,4 @@
-import mongoose, {Document, model, Model, Schema} from 'mongoose';
+import {Document, model, Model, Schema} from 'mongoose';
 import {User} from '../../../domain/entity/userEntity';
 
 export interface UserDocument extends User, Document {}
@@ -35,12 +35,10 @@ const userSchema = new Schema<UserDocument>(
     }
 );
 
-// Virtual для id: преобразуем _id в string
 userSchema.virtual('id').get(function (this: UserDocument) {
     return this._id.toHexString();
 });
 
-// Включаем virtuals в toJSON/toObject (для сериализации, если нужно)
 userSchema.set('toObject', {virtuals: true});
 userSchema.set('toJSON', {virtuals: true});
 

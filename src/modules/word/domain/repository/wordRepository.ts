@@ -1,7 +1,7 @@
-import type {WordEntity} from '../entity/wordEntity';
+import type {Word} from '../entity/word';
 
-export type AddWordData = Omit<WordEntity, 'id' | 'createdAt'>;
+export type AddWordData = Omit<Word, 'id' | 'createdAt'>;
 
 export interface IWordRepository {
-    add(word: AddWordData): Promise<WordEntity>;
+    add(word: AddWordData): Promise<Word>;
 }

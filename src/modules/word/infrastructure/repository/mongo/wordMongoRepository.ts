@@ -2,14 +2,14 @@ import type {
     AddWordData,
     IWordRepository,
 } from '@src/modules/word/domain/repository/wordRepository';
-import type {WordEntity} from '@src/modules/word/domain/entity/wordEntity';
-import {WordModel} from '@src/modules/word/infrastructure/repository/mongo/model';
+import type {Word} from '@src/modules/word/domain/entity/word';
+import {WordDocument, WordModel} from '@src/modules/word/infrastructure/repository/mongo/model';
 import {WordAlreadyExistsError} from '@src/modules/word/domain/error/wordError';
 import {MongoDBErrorCodes} from '@src/infrastructure/database/mongo/error';
 import {DatabaseError} from '@src/domain/errors';
 
 export class WordMongoRepository implements IWordRepository {
-    async add(word: AddWordData): Promise<WordEntity> {
+    async add(word: AddWordData): Promise<Word> {
         try {
             const newWordDoc = await WordModel.create(word);
             return this.toEntity(newWordDoc);
@@ -21,9 +21,9 @@ export class WordMongoRepository implements IWordRepository {
         }
     }
 
-    private toEntity(doc: any): WordEntity {
+    private toEntity(doc: WordDocument): Word {
         return {
-            id: doc._id.toString(),
+            id: doc.id,
             text: doc.text,
             translation: doc.translation,
             example: doc.example,
