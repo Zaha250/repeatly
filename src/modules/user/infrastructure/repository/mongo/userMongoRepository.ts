@@ -49,6 +49,6 @@ export class UserMongoRepository implements IUserRepository {
     }
 
     private toEntity(doc: UserDocument): User {
-        return new User(doc.tgId, doc.username, doc.firstName, doc.createdAt, doc.isActive);
+        return new User(doc.id, doc.tgId, doc.username, doc.firstName, doc.createdAt, doc.isActive);
     }
 }
